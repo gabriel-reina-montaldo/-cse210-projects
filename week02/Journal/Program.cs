@@ -1,7 +1,8 @@
 using System;
 using System.Security.Cryptography;
 
-// Added an option in which you can clear all the entries.
+// Added a "Clear all" option that allows users to delete
+// all journal entries and includes a confirmation step before deleting them.
 
 class Program
 {
@@ -70,7 +71,7 @@ class Program
                 string response = Console.ReadLine();
                 response = response.ToLower();
 
-                if (response == "Yes")
+                if (response == "yes")
                 {
                     theJournal.ClearAll();
                 }
