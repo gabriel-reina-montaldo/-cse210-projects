@@ -1,4 +1,7 @@
 using System;
+using System.Security.Cryptography;
+
+// Added an option in which you can clear all the entries.
 
 class Program
 {
@@ -11,7 +14,7 @@ class Program
 
         Console.WriteLine("Welcome to the Journal Program!");
 
-        while (choice != "5")
+        while (choice != "6")
         {
             Console.WriteLine();
             Console.WriteLine("Please select one of the following choices:");
@@ -19,7 +22,8 @@ class Program
             Console.WriteLine("2. Display");
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("5. Clear all");
+            Console.WriteLine("6. Quit");
             Console.WriteLine("What would you like to do?");
             choice = Console.ReadLine();
 
@@ -46,15 +50,31 @@ class Program
 
             else if (choice == "3")
             {
+                Console.WriteLine("What is the file name?");
+                string file = Console.ReadLine();
 
+                theJournal.LoadFromFile(file);
             }
 
             else if (choice == "4")
             {
+                Console.WriteLine("What is the file name?");
+                string file = Console.ReadLine();
 
+                theJournal.SaveToFile(file);
+            }
+
+            else if (choice == "5")
+            {
+                Console.WriteLine("Are you sure you want to clear all entries? (Yes/No)");
+                string response = Console.ReadLine();
+                response = response.ToLower();
+
+                if (response == "Yes")
+                {
+                    theJournal.ClearAll();
+                }
             }
         }
-        
-        
     }
 }
