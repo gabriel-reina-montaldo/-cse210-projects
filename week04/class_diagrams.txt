@@ -1,0 +1,64 @@
+Youtube Video Program
+
+Video Class
+
+_title : string
+_author : string
+_length : int
+_comments : List<Comment>
+
+GetNumberOfComments() : int
+
+
+Comment Class
+
+_name : string
+_text : string
+
+The program will create Videos and Comments. Each Video will store its title, author, length, and a list of comments. The 
+GetNumberOfComments() method will return the number of comments for each video. The program will create multiple videos and display 
+their information and comments.
+
+------------------------
+
+Online Ordering Program
+
+Product Class
+
+_productName : string
+_productId : int
+_productPrice : double
+_quantity : int
+
+GetTotalCost() : double
+
+
+Customer Class
+
+_name : string
+_address : Address
+
+IsInUSA() : bool
+
+Address Class
+
+_street : string
+_city : string
+_state : string
+_country : string
+
+IsInUSA() : bool
+GetFullAddress() : string
+
+Order Class
+
+_products : List<Product>
+_customer : Customer
+
+ComputeTotalCost() : double
+GetPackingLabel() : string
+GetShippingLabel() : string
+
+The program will create Products, Customers, Addresses, and Orders. Products calculate their total cost, while Customers and Addresses 
+determine if the customer lives in the USA. Orders use this information to calculate the total price and generate packing and shipping 
+labels. The program will create multiple orders and display the results.
