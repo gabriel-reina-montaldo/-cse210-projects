@@ -28,7 +28,7 @@ The program will create Videos and Comments. Each Video will store its title, au
 GetNumberOfComments() method will return the number of comments for each video. The program will create multiple videos and display 
 their information and comments.
 
-------------------------
+---------------------------------------------------
 
 Online Ordering Program
 
