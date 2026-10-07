@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class ListingActivity : Activity
 {
@@ -15,15 +14,52 @@ public class ListingActivity : Activity
 
     public void Run()
     {
+        DisplayStartingMessage();
+
+        string prompt = GetRandomPrompt();
+
+        Console.WriteLine();
+        Console.WriteLine("List as many responses you can to the following prompt:");
+        Console.WriteLine($"---{prompt}---");
+        Console.WriteLine();
+
+        Console.Write($"You may begin in: ");
+        ShowCountDown(5);
+        Console.WriteLine();
+
+        List<string> responses = GetListFromUser();
+        _count = responses.Count;
+
+        Console.WriteLine();
+        Console.WriteLine($"You listed {_count} items!");
+
+        DisplayEndingMessage();
     }
 
     public string GetRandomPrompt()
     {
-        return "";
+        Random random = new Random();
+        int index = random.Next(_prompts.Count);
+
+        return _prompts[index];
     }
 
     public List<string> GetListFromUser()
     {
-        return new List<string>();
+        List<string> responses = new List<string>();
+        DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
+
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("> ");
+            string response = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                responses.Add(response);
+            }            
+        }
+
+        return responses;        
     }
 }
