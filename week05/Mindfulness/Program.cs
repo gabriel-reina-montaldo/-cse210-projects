@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+// Exceeding requirement:
+// Prompts and questions do not repeat until all available prompts have been used.
+
 class Program
 {
     static void Main(string[] args)
@@ -15,7 +18,7 @@ class Program
             Console.WriteLine(" 2. Start reflecting activity.");
             Console.WriteLine(" 3. Start listing activity");
             Console.WriteLine(" 4. Quit.");
-            Console.WriteLine("Select a choice from the menu: ");
+            Console.Write("Select a choice from the menu: ");
             choice = Console.ReadLine();
 
             if (choice == "1")
@@ -46,11 +49,16 @@ class Program
                 questions.Add("What did you learn about yourself through this experience?");
                 questions.Add("How can you keep this experience in mind in the future?");
 
+                List<string> usedPrompts = new List<string>();
+                List<string> usedQuestions = new List<string>();
+
                 ReflectingActivity activity = new ReflectingActivity("Reflecting Activity",
                 "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.",
                 0,
                 prompts,
-                questions);
+                questions,
+                usedPrompts,
+                usedQuestions);
 
                 activity.Run();
             }

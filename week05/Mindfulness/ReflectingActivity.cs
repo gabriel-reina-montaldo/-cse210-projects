@@ -5,11 +5,15 @@ public class ReflectingActivity : Activity
 {
     private List<string> _prompts;
     private List<string> _questions;
+    private List<string> _usedPrompts;
+    private List<string> _usedQuestions;
 
-    public ReflectingActivity(string name, string description, int duration, List<string> prompts, List<string> questions) : base(name, description, duration)
+    public ReflectingActivity(string name, string description, int duration, List<string> prompts, List<string> questions, List<string> usedPrompts, List<string> usedQuestions) : base(name, description, duration)
     {
         _prompts = prompts;
         _questions = questions;
+        _usedPrompts = usedPrompts;
+        _usedQuestions = usedQuestions;
     }
 
     public void Run()
@@ -22,7 +26,6 @@ public class ReflectingActivity : Activity
         Console.WriteLine("When you have something in mind, press enter to continue.");
         Console.ReadLine();
 
-        Console.WriteLine();
         Console.WriteLine("Now ponder on each of the following questions as they relate to this experience.");
         Console.Write($"You may begin in: ");
         ShowCountDown(5);
@@ -32,37 +35,75 @@ public class ReflectingActivity : Activity
         while (DateTime.Now < endTime)
         {
             DisplayQuestions();
-            ShowSpinner(5);
-            Console.WriteLine();
+            ShowSpinner(10);
         }
 
+        Console.WriteLine();
         DisplayEndingMessage();
     }
 
     public string GetRandomPrompt()
     {
         Random random = new Random();
-        int index = random.Next(_prompts.Count);
+        List<string> availablePrompts = new List<string>();
 
-        return _prompts[index];
+        foreach (string prompt in _prompts)
+        {
+            if (!_usedPrompts.Contains(prompt))
+            {
+                availablePrompts.Add(prompt);
+            }
+        }
+
+        if (availablePrompts.Count == 0)
+        {
+            _usedPrompts.Clear();
+            availablePrompts = new List<string>(_prompts);
+        }
+
+        int index = random.Next(availablePrompts.Count);
+        string selectedPrompt = availablePrompts[index];
+
+        _usedPrompts.Add(selectedPrompt);
+
+        return selectedPrompt;
     }
 
     public string GetRandomQuestion()
     {
         Random random = new Random();
-        int index = random.Next(_questions.Count);
 
-        return _questions[index];
+        List<string> availableQuestions = new List<string>();
+
+        foreach (string question in _questions)
+        {
+            if (!_usedQuestions.Contains(question))
+            {
+                availableQuestions.Add(question);
+            }
+        }
+
+        if (availableQuestions.Count == 0)
+        {
+            _usedQuestions.Clear();
+            availableQuestions = new List<string>(_questions);
+        }
+
+        int index = random.Next(availableQuestions.Count);
+        string selectedQuestion = availableQuestions[index];
+
+        _usedQuestions.Add(selectedQuestion);
+
+        return selectedQuestion;
     }
 
     public void DisplayPrompt()
     {
         string prompt = GetRandomPrompt();
 
-        Console.WriteLine();
         Console.WriteLine("Consider the following prompt: ");
-        Console.WriteLine($"---{prompt}---");
         Console.WriteLine();
+        Console.WriteLine($"---{prompt}---");
     }
 
     public void DisplayQuestions()
@@ -70,6 +111,6 @@ public class ReflectingActivity : Activity
         string question = GetRandomQuestion();
 
         Console.WriteLine();
-        Console.WriteLine($"> {question} ");
+        Console.Write($"> {question} ");
     }
 }
