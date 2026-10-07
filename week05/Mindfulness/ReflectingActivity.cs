@@ -29,13 +29,14 @@ public class ReflectingActivity : Activity
         Console.WriteLine("Now ponder on each of the following questions as they relate to this experience.");
         Console.Write($"You may begin in: ");
         ShowCountDown(5);
+        Console.WriteLine();
 
         DateTime endTime = DateTime.Now.AddSeconds(GetDuration());
 
         while (DateTime.Now < endTime)
         {
             DisplayQuestions();
-            ShowSpinner(10);
+            ShowSpinner(7);
         }
 
         Console.WriteLine();

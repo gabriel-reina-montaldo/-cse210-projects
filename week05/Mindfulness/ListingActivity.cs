@@ -18,8 +18,8 @@ public class ListingActivity : Activity
 
         string prompt = GetRandomPrompt();
 
-        Console.WriteLine();
         Console.WriteLine("List as many responses you can to the following prompt:");
+        Console.WriteLine();
         Console.WriteLine($"---{prompt}---");
         Console.WriteLine();
 
