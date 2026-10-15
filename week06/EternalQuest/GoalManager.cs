@@ -21,6 +21,7 @@ public class GoalManager
         {
             Console.WriteLine();
             Console.WriteLine($"You have {_score} points.");
+            Console.WriteLine($"Your level: {GetPlayerLevel()}");
             Console.WriteLine();
             Console.WriteLine("Menu Options:");
             Console.WriteLine("  1. Create New Goal");
@@ -63,6 +64,12 @@ public class GoalManager
     public void DisplayPlayerInfo()
     {
         Console.WriteLine($"You have {_score} points.");
+        Console.WriteLine($"Your level: {GetPlayerLevel()}");
+    }
+
+    public int GetPlayerLevel()
+    {
+        return (_score / 500) + 1;
     }
 
     public void ListGoalNames()
@@ -156,6 +163,8 @@ public class GoalManager
             return;
         }
 
+        int previousLevel = GetPlayerLevel();
+
         goal.RecordEvent();
         _score += goal.GetPoints();
 
@@ -177,6 +186,12 @@ public class GoalManager
 
         Console.WriteLine($"You earned {goal.GetPoints()} points!");
         DisplayPlayerInfo();
+
+        int newLevel = GetPlayerLevel();
+        if (newLevel > previousLevel)
+        {
+            Console.WriteLine("Congratulations! You leveled up!");
+        }
     }
 
     public void SaveGoals()

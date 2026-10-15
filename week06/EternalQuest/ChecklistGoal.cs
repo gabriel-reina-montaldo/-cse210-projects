@@ -1,5 +1,4 @@
 using System;
-using System.Formats.Tar;
 
 public class ChecklistGoal : Goal
 {
